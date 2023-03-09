@@ -34,7 +34,21 @@
             </select>
 
             <label>Convert To:</label>
-        
+                    <select name="scale_to">
+                <option value="" NULL<?php if (isset($_POST['scale_to']) && $_POST['scale_from'] == NULL) echo 'selected = "unselected"'; ?>>Select one</option>
+
+                <option value="c" <?php if (isset($_POST['scale_to']) && $_POST['scale_to'] == 'c') echo 'selected = "selected"'; ?>>Celsius</option>
+
+                <option value="k" <?php if (isset($_POST['scale_to']) && $_POST['scale_to'] == 'k') echo 'selected = "selected"'; ?>>Kelvin</option>
+
+                <option value="f" <?php if (isset($_POST['scale_to']) && $_POST['scale_to'] == 'f') echo 'selected = "selected"'; ?>>Fahrenheit</option>
+            </select>
+
+            <a href="" class="reset">Reset</a>
+        </fieldset>
+        <input type="submit" />
+    </form>
+
         
 </body>
 
