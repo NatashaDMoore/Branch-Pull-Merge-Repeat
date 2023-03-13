@@ -48,6 +48,59 @@
         </fieldset>
         <input type="submit" />
     </form>
+        
+         <?
+    //form.php
+
+    // header('Content-Type: text/html; charset=utf-8');
+
+    echo '';
+    if (isset($_POST["temp_from"])) { // show data
+
+        $temp_from = $_POST["temp_from"];
+        $scale_from = $_POST["scale_from"];
+        $scale_to = $_POST["scale_to"];
+        // $result = 0;
+
+        if (!is_numeric($temp_from)) {
+            echo "<p class='error'>Temperature must be number.</p>";
+        }
+
+        if (($scale_from == "") || ($scale_to == "")) {
+            echo "<p class='error'>Please select both temperature scales.</p>";
+        } elseif ($scale_from == $scale_to) {
+            echo "<p class='error'>Temperature scales must be different.</p>";
+        } elseif ($scale_from == "f" && $scale_to == "c") {
+            $result = ($temp_from - 32) * (5 / 9);
+        } elseif ($scale_from == "c" && $scale_to == "f") {
+            $result = ($temp_from * (9 / 5)) + 32;
+        } elseif ($scale_from == "c" && $scale_to == "k") {
+            $result = $temp_from + 273.15;
+        } elseif ($scale_from == "k" && $scale_to == "c") {
+            $result = $temp_from - 273.15;
+        } elseif ($scale_from == "f" && $scale_to == "k") {
+            $result = ($temp_from + 459.67) * (5 / 9);
+        } elseif ($scale_from == "k" && $scale_to == "f") {
+            $result = ($temp_from * (9 / 5)) - 459.67;
+        } else {
+            echo "<p class='error'>Please complete entire form.</p>";
+        }
+
+        if (
+            is_numeric($temp_from) &&
+            is_numeric($result) &&
+            !empty($scale_from) &&
+            !empty($scale_to)
+        ) {
+            echo '
+            <div class="box">
+            <p>' . $temp_from . '&#176' . strtoupper($scale_from) . ' = ' . round($result, 2) . '&#176' . strtoupper($scale_to) . '</p>
+            </div>
+          ';
+        }
+    } //end if(isset)
+
+    ?>
 
         
 </body>
